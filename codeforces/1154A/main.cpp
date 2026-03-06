@@ -4,21 +4,26 @@ using namespace std;
 
 int main(){
 	int x[4];
-	int r[3];
 
-	int maior;
+	int maior = 0;
 
 	cin >> x[0] >> x[1] >> x[2] >> x[3];
 
 	//Descobrir o maior número informado.
-	for(int i = 0; i < 4; i++){
-		if(i == 0) maior = x[i];
-		else if (x[i] > maior) maior = x[i];
+	int i;
+	for(i = 1; i < 4; i++){
+		if(x[maior] < x[i]){
+			maior = i;
+		}
 	}
+	i--;
+	int aux = x[maior];
+	x[maior] = x[i];
+	x[i] = aux;
 
-	r[0] = maior / 2;
-	r[1] = (maior / 2) - 1;
-	r[2] = 1;
+	cout << (x[0] + x[2]) - x[3] << " ";
+	cout << (x[0] + x[1]) - x[3] << " ";
+	cout << (x[1] + x[2]) - x[3] << " ";
 
-	cout << r[0] << r[1] << r[2] << endl;
+	return 0;
 }
