@@ -3,7 +3,7 @@
 
 using namespace std;
 
-long long function(int n){
+long long function(long long n){
 	return (pow(-1,n)*(2*n + 1)-1)/4;
 }
 
