@@ -2,81 +2,49 @@
 
 using namespace std;
 
-void getSequenceB(int* array, int len){
-	for(int i = 0; i < len; i++){
-		cin >> array[i];
+void getDivisors(int num, int n, int k){
+	int divisors[n];
+	bool resp = false;
+	for(int i = 0; i < n; i++){
+		cin >> divisors[i];
 	}
-}
-
-int multArray(int* array, int len){
-	int resp = 1;
-	for(int i = 0; i < len; i++){
-		resp *= array[i];
-	}
-	return resp;
-}
-
-bool verifySequenceB(int* array, int len){
-	bool resp = true;
-	for(int i = 0; i < len; i++){
-		if((2023 % array[i]) != 0){
-			i = len;
-			resp = false;
+	for(int d : divisors){
+		if(num % d != 0){
+			// cout << num << " % "<< d << " = " << d % num << endl;
+			cout << "NO" << endl;
+			resp = true;
+			break;
 		}
 	}
-	int bProduct = multArray(array,len);
-
-	if((2023 % bProduct) > 0) resp = false;
-
-	return resp;
-}
-
-void preencheNumeros(int* array, int len,int falta){
-	int i = 0;
-	if(falta == 1){
-		array[0] = 7;
-		array[1] = 17;
-		array[2] = 17;
-		i = 3;
-	}
-	for(i; i < len; i++){
-
-	}
-}
-
-void getSequenceA(){
-	int N, K;
-
-	cin >> N >> K;
-
-	int sequenceB[N];
-
-	getSequenceB(sequenceB,N);
-
-	if(verifySequenceB(sequenceB,N)){
-		int nFaltantes[K];
-
-		int bProduct = multArray(sequenceB,N);
-
-		int falta = 2023 / bProduct;
-
-		preencheNumeros(nFaltantes,K,falta);
-
-		cout << "bProduct: " << bProduct << endl;
-		cout << "Falta: " << falta << endl;
-	}else{
-		cout << "NO" << endl;
+	if(!resp){
+		int total = 1;
+		int i = 1;
+		for(int d : divisors){
+			total *= d;
+		}
+		if(num % total != 0){
+			cout << "NO" << endl;
+		}else{
+			cout << "YES" << endl;
+			for(int i = 0; i < k; i++){
+				if(i == 0) cout << num / total << " ";
+				else cout << 1;
+				if(i < k - 1) cout << " ";
+			}
+			cout << endl;
+		}
 	}
 }
 
 int main(){
-	int T;
+	int testCases;
 
-	cin >> T;
+	cin >> testCases;
 
-	for(int i = 0; i < T; i++){
-		getSequenceA();
+	for(int i = 0; i < testCases; i++){
+		int n;
+		int k;
+		cin >> n >> k;
+		getDivisors(2023,n,k);
 	}
-
-	return 0;
 }
